@@ -45,12 +45,33 @@ def circle(start, end):
         left(1)
 
     end_fill() 
+
 def rectangle(start, end):
     "Draw rectangle from start to end."
-    pass
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+    for i in range(2):
+        forward(end.x-start.x)
+        right(90)
+        forward(end.y-start.y)
+    end_fill()
+
 def triangle(start, end):
-    "Draw triangle from start to end."
-    pass
+    up()
+    goto(start.x, start.y)
+    down()
+    begin_fill()
+    forward(end.x - start.x)
+
+    left(90)
+    forward((end.y - start.y) / 2)
+
+    left(135)  
+    forward(((end.x - start.x) ** 2 + ((end.y - start.y) / 2) ** 2) ** 0.5)  
+    end_fill()
+
 
 def tap(x, y):
     "Store starting point or draw shape."
