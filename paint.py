@@ -35,7 +35,6 @@ def square(start, end):
 
     end_fill()
 
-
 def circle(start, end):
     up()
     goto(start.x, start.y)
@@ -43,10 +42,14 @@ def circle(start, end):
     begin_fill()
 
     radius = ((end.x - start.x) ** 2 + (end.y - start.y) ** 2) ** 0.5
+
+    up()
+    goto(start.x, start.y - radius)
+    down()
+
     turtle.circle(radius)
 
     end_fill()
-
 
 def rectangle(start, end):
     """Draw rectangle from start to end."""
