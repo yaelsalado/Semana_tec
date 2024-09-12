@@ -3,7 +3,7 @@ from turtle import *
 from freegames import square, vector
 import random
 
-# Lista de colores excepto el rojo
+# Lista de colores
 colors = ['blue', 'green', 'yellow', 'purple', 'orange']
 
 # Seleccionar colores diferentes al azar para la serpiente y la comida
@@ -28,6 +28,20 @@ def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
+# Movimiento de la comida
+def move_food():
+    directions = [vector(10, 0), vector(-10, 0), vector(0, 10), vector(0, -10)]
+    move_direction = directions[randrange(4)]
+
+    new_x = food.x + move_direction.x
+    new_y = food.y + move_direction.y
+
+    # Comprobar los limites
+    if -200 < new_x < 190 and -200 < new_y < 190:
+        food.x = new_x
+        food.y = new_y
+
+
 def move():
     """Move snake forward one segment."""
     head = snake[-1].copy()
@@ -46,6 +60,8 @@ def move():
         food.y = randrange(-15, 15) * 10
     else:
         snake.pop(0)
+
+    move_food()
 
 
     clear()
