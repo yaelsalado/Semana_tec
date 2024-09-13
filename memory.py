@@ -48,6 +48,14 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
 
+def reveal_all(): #Revelar fichas
+    global hide
+    hide = [False] * 64
+
+def show_numbers():
+    global show_all_numbers #revelar numeros
+    show_all_numbers = True 
+
 def draw():
     "Draw image and tiles."
     clear()
@@ -72,16 +80,16 @@ def draw():
     if mark is not None and hide[mark]:
         x, y = xy(mark)
         up()
-        goto(x + 2, y)
+        goto(x + 25, y+10)
         color('black')
-        write(tiles[mark], font=('Arial', 30, 'normal'))
+        write(tiles[mark], align='center', font=('Arial', 30, 'normal'))
 
     up()
     goto(-180, 180)  #contador en la pantalla
     color('black')
     write(f'Taps: {tap_count}', font=('Arial', 16, 'normal'))
 
-     if all(not tile for tile in hide): #Verificar si se terminó el juego
+    if all(not tile for tile in hide):
         up()
         goto(0, 0)
         color('green')
@@ -96,5 +104,8 @@ addshape(car)
 hideturtle()
 tracer(False)
 onscreenclick(tap)
+onkey(reveal_all, 's')
+onkey(show_numbers,'n')
+listen()
 draw()
 done()
